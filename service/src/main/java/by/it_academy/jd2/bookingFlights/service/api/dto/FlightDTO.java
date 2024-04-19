@@ -1,18 +1,22 @@
 package by.it_academy.jd2.bookingFlights.service.api.dto;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
-import java.sql.Timestamp;
-import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
-@Builder
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class FlightDTO {
-    private int flightId;
+    private Integer flightId;
     private String flightNo;
-    private Timestamp scheduledDeparture;
-    private Timestamp scheduledArrival;
+    private OffsetDateTime scheduledDeparture;
+    private LocalDateTime scheduledDepartureLocal;
+    private OffsetDateTime scheduledArrival;
+    private LocalDateTime scheduledArrivalLocal;
     private String departureAirport;
     private String departureAirportName;
     private String departureCity;
@@ -20,9 +24,9 @@ public class FlightDTO {
     private String arrivalAirportName;
     private String arrivalCity;
     private String status;
-    private Timestamp actualDeparture;
-    private Timestamp actualArrival;
-    private Duration scheduledDuration;
-    private Duration actualDuration;
+    private String aircraftCode;
+    private OffsetDateTime actualDeparture;
+    private LocalDateTime actualDepartureLocal;
+    private OffsetDateTime actualArrival;
+    private LocalDateTime actualArrivalLocal;
 }
-

@@ -1,6 +1,6 @@
 package by.it_academy.jd2.bookingFlights.dao.Factory;
 
-import by.it_academy.jd2.bookingFlights.dao.FlightDao;
+import by.it_academy.jd2.bookingFlights.dao.impl.FlightDao;
 import by.it_academy.jd2.bookingFlights.dao.api.IFlightDao;
 
 import java.sql.Connection;
@@ -16,7 +16,7 @@ public class DaoFactory {
     private static final Properties props = new Properties();
 
     static {
-        props.setProperty("user", "voting_app");
+        props.setProperty("user", "airport_app");
         props.setProperty("password", "1234");
 
         try {

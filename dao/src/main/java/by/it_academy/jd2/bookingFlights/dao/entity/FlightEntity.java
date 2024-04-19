@@ -1,13 +1,16 @@
 package by.it_academy.jd2.bookingFlights.dao.entity;
 
-import java.time.Duration;
-import java.time.ZonedDateTime;
+import java.time.*;
 
 public class FlightEntity {
-    private long flightId;
+    private Integer flightId;
     private String flightNo;
-    private ZonedDateTime scheduledDeparture;
-    private ZonedDateTime scheduledArrival;
+    private OffsetDateTime scheduledDeparture;
+    private LocalDateTime scheduledDepartureLocal;
+    private OffsetDateTime scheduledArrival;
+    private LocalDateTime scheduledArrivalLocal;
+
+    //    private  scheduledDuration;
     private String departureAirport;
     private String departureAirportName;
     private String departureCity;
@@ -15,41 +18,23 @@ public class FlightEntity {
     private String arrivalAirportName;
     private String arrivalCity;
     private String status;
-    private ZonedDateTime actualDeparture;
-    private ZonedDateTime actualArrival;
-    private Duration scheduledDuration;
-    private Duration actualDuration;
+    private String aircraftCode;
+    private OffsetDateTime actualDeparture;
+    private LocalDateTime actualDepartureLocal;
+    private OffsetDateTime actualArrival;
+    private LocalDateTime actualArrivalLocal;
 
-    public FlightEntity(long flightId, String flightNo, ZonedDateTime scheduledDeparture, ZonedDateTime scheduledArrival,
-                        String departureAirport, String departureAirportName, String departureCity,
-                        String arrivalAirport, String arrivalAirportName, String arrivalCity,
-                        String status, ZonedDateTime actualDeparture, ZonedDateTime actualArrival,
-                        Duration scheduledDuration, Duration actualDuration) {
-        this.flightId = flightId;
-        this.flightNo = flightNo;
-        this.scheduledDeparture = scheduledDeparture;
-        this.scheduledArrival = scheduledArrival;
-        this.departureAirport = departureAirport;
-        this.departureAirportName = departureAirportName;
-        this.departureCity = departureCity;
-        this.arrivalAirport = arrivalAirport;
-        this.arrivalAirportName = arrivalAirportName;
-        this.arrivalCity = arrivalCity;
-        this.status = status;
-        this.actualDeparture = actualDeparture;
-        this.actualArrival = actualArrival;
-        this.scheduledDuration = scheduledDuration;
-        this.actualDuration = actualDuration;
-    }
+//    private actual_duration;
+
 
     public FlightEntity() {
     }
 
-    public long getFlightId() {
+    public Integer getFlightId() {
         return flightId;
     }
 
-    public void setFlightId(long flightId) {
+    public void setFlightId(Integer flightId) {
         this.flightId = flightId;
     }
 
@@ -61,20 +46,36 @@ public class FlightEntity {
         this.flightNo = flightNo;
     }
 
-    public ZonedDateTime getScheduledDeparture() {
+    public OffsetDateTime getScheduledDeparture() {
         return scheduledDeparture;
     }
 
-    public void setScheduledDeparture(ZonedDateTime scheduledDeparture) {
+    public void setScheduledDeparture(OffsetDateTime scheduledDeparture) {
         this.scheduledDeparture = scheduledDeparture;
     }
 
-    public ZonedDateTime getScheduledArrival() {
+    public LocalDateTime getScheduledDepartureLocal() {
+        return scheduledDepartureLocal;
+    }
+
+    public void setScheduledDepartureLocal(LocalDateTime scheduledDepartureLocal) {
+        this.scheduledDepartureLocal = scheduledDepartureLocal;
+    }
+
+    public OffsetDateTime getScheduledArrival() {
         return scheduledArrival;
     }
 
-    public void setScheduledArrival(ZonedDateTime scheduledArrival) {
+    public void setScheduledArrival(OffsetDateTime scheduledArrival) {
         this.scheduledArrival = scheduledArrival;
+    }
+
+    public LocalDateTime getScheduledArrivalLocal() {
+        return scheduledArrivalLocal;
+    }
+
+    public void setScheduledArrivalLocal(LocalDateTime scheduledArrivalLocal) {
+        this.scheduledArrivalLocal = scheduledArrivalLocal;
     }
 
     public String getDepartureAirport() {
@@ -133,57 +134,44 @@ public class FlightEntity {
         this.status = status;
     }
 
-    public ZonedDateTime getActualDeparture() {
+    public String getAircraftCode() {
+        return aircraftCode;
+    }
+
+    public void setAircraftCode(String aircraftCode) {
+        this.aircraftCode = aircraftCode;
+    }
+
+    public OffsetDateTime getActualDeparture() {
         return actualDeparture;
     }
 
-    public void setActualDeparture(ZonedDateTime actualDeparture) {
+    public void setActualDeparture(OffsetDateTime actualDeparture) {
         this.actualDeparture = actualDeparture;
     }
 
-    public ZonedDateTime getActualArrival() {
+    public LocalDateTime getActualDepartureLocal() {
+        return actualDepartureLocal;
+    }
+
+    public void setActualDepartureLocal(LocalDateTime actualDepartureLocal) {
+        this.actualDepartureLocal = actualDepartureLocal;
+    }
+
+    public OffsetDateTime getActualArrival() {
         return actualArrival;
     }
 
-    public void setActualArrival(ZonedDateTime actualArrival) {
+    public void setActualArrival(OffsetDateTime actualArrival) {
         this.actualArrival = actualArrival;
     }
 
-    public Duration getScheduledDuration() {
-        return scheduledDuration;
+    public LocalDateTime getActualArrivalLocal() {
+        return actualArrivalLocal;
     }
 
-    public void setScheduledDuration(Duration scheduledDuration) {
-        this.scheduledDuration = scheduledDuration;
-    }
-
-    public Duration getActualDuration() {
-        return actualDuration;
-    }
-
-    public void setActualDuration(Duration actualDuration) {
-        this.actualDuration = actualDuration;
-    }
-
-    @Override
-    public String toString() {
-        return "FlightEntity{" +
-                "flightId=" + flightId +
-                ", flightNo='" + flightNo + '\'' +
-                ", scheduledDeparture=" + scheduledDeparture +
-                ", scheduledArrival=" + scheduledArrival +
-                ", departureAirport='" + departureAirport + '\'' +
-                ", departureAirportName='" + departureAirportName + '\'' +
-                ", departureCity='" + departureCity + '\'' +
-                ", arrivalAirport='" + arrivalAirport + '\'' +
-                ", arrivalAirportName='" + arrivalAirportName + '\'' +
-                ", arrivalCity='" + arrivalCity + '\'' +
-                ", status='" + status + '\'' +
-                ", actualDeparture=" + actualDeparture +
-                ", actualArrival=" + actualArrival +
-                ", scheduledDuration=" + scheduledDuration +
-                ", actualDuration=" + actualDuration +
-                '}';
+    public void setActualArrivalLocal(LocalDateTime actualArrivalLocal) {
+        this.actualArrivalLocal = actualArrivalLocal;
     }
 }
 

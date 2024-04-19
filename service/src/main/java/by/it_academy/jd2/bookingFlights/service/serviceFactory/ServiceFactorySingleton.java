@@ -1,7 +1,7 @@
 package by.it_academy.jd2.bookingFlights.service.serviceFactory;
 
 import by.it_academy.jd2.bookingFlights.dao.Factory.DaoFactory;
-import by.it_academy.jd2.bookingFlights.service.FlightService;
+import by.it_academy.jd2.bookingFlights.service.impl.FlightService;
 import by.it_academy.jd2.bookingFlights.service.api.IFlightService;
 
 public class ServiceFactorySingleton {
