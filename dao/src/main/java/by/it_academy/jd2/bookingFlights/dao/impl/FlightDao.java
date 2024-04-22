@@ -96,13 +96,13 @@ public class FlightDao implements IFlightDao {
     private final static String GET_FILTER_PAGE = "SELECT *\n" +
             "FROM bookings.flights_v\n" +
             "WHERE \n" +
-            "    (departure_airport = ? OR ? IS NULL) AND\n" +
-            "    (arrival_airport = ? OR ? IS NULL) AND\n" +
-            "    (status = ? OR ? IS NULL) AND\n" +
-            "    (scheduled_departure >= ? OR ? IS NULL) AND\n" +
-            "    (scheduled_departure <= ? OR ? IS NULL) AND\n" +
-            "    (scheduled_arrival >= ? OR ? IS NULL) AND\n" +
-            "    (scheduled_arrival <= ? OR ? IS NULL);";
+            "    (departure_airport = COALESCE(?, null)) AND\n" +
+            "    (arrival_airport = COALESCE(?, null)) AND\n" +
+            "    (status = COALESCE(?, null)) AND\n" +
+            "    (scheduled_departure >= COALESCE(?, null)) AND\n" +
+            "    (scheduled_departure <= COALESCE(?, null)) AND\n" +
+            "    (scheduled_arrival >= COALESCE(?, null)) AND\n" +
+            "    (scheduled_arrival <= COALESCE(?, null));";
 
     @Override
     public Optional<FlightEntity> getFlight(int id) {
@@ -157,27 +157,27 @@ public class FlightDao implements IFlightDao {
 
     @Override
     public List<FlightEntity> getFlight(FlightFilterDTO filter) {
-        try(Connection conn = DaoFactory.getConnection();
-            PreparedStatement st = conn.prepareStatement(GET_FILTER_PAGE)){
+        try (Connection conn = DaoFactory.getConnection();
+             PreparedStatement st = conn.prepareStatement(GET_FILTER_PAGE)) {
 
             st.setObject(1, filter.getDepartureAirport());
-            st.setObject(2, filter.getDepartureAirport());
-            st.setObject(3, filter.getArrivalAirport());
-            st.setObject(4, filter.getArrivalAirport());
-            st.setObject(5, filter.getStatus());
-            st.setObject(6, filter.getStatus());
-            st.setObject(7, filter.getDepartureDateFrom());
-            st.setObject(8, filter.getDepartureDateFrom());
-            st.setObject(9, filter.getDepartureDateTo());
-            st.setObject(10, filter.getDepartureDateTo());
-            st.setObject(11, filter.getArrivalDateFrom());
-            st.setObject(12, filter.getArrivalDateFrom());
-            st.setObject(13, filter.getArrivalDateTo());
-            st.setObject(14, filter.getArrivalDateTo());
 
-            try(ResultSet rs = st.executeQuery()){
+            st.setObject(2, filter.getArrivalAirport());
+
+            st.setObject(3, filter.getStatus());
+
+            st.setObject(4, filter.getDepartureDateFrom());
+
+            st.setObject(5, filter.getDepartureDateTo());
+
+            st.setObject(6, filter.getArrivalDateFrom());
+
+            st.setObject(7, filter.getArrivalDateTo());
+
+
+            try (ResultSet rs = st.executeQuery()) {
                 List<FlightEntity> data = new ArrayList<>();
-                while (rs.next()){
+                while (rs.next()) {
                     data.add(read(rs));
                 }
                 return data;
@@ -186,8 +186,6 @@ public class FlightDao implements IFlightDao {
             throw new RuntimeException(e);
         }
     }
-
-// остальные методы
 
 
     private FlightEntity read(ResultSet rs) throws SQLException {

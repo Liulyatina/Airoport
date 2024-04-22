@@ -28,35 +28,43 @@ public class FilterServlet extends HttpServlet {
     private static final String ARRIVAL_DATE_TO = "arrivalDateTo";
 
     private final IFlightService flightService = ServiceFactorySingleton.getFlightService();
-
     private final ObjectMapper mapper = ControllerFactory.getMapper();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
+        try (PrintWriter writer = resp.getWriter()) {
+            String departureAirport = req.getParameter(DEPARTURE_AIRPORT);
+            String arrivalAirport = req.getParameter(ARRIVAL_AIRPORT);
+            String status = req.getParameter(STATUS);
 
-        PrintWriter writer = resp.getWriter();
+            LocalDateTime departureDateFrom = parseLocalDateTime(req.getParameter(DEPARTURE_DATE_FROM));
+            LocalDateTime departureDateTo = parseLocalDateTime(req.getParameter(DEPARTURE_DATE_TO));
+            LocalDateTime arrivalDateFrom = parseLocalDateTime(req.getParameter(ARRIVAL_DATE_FROM));
+            LocalDateTime arrivalDateTo = parseLocalDateTime(req.getParameter(ARRIVAL_DATE_TO));
 
+            FlightFilterDTO filter = new FlightFilterDTO();
+            filter.setDepartureAirport(departureAirport);
+            filter.setArrivalAirport(arrivalAirport);
+            filter.setStatus(status);
+            filter.setDepartureDateFrom(departureDateFrom);
+            filter.setDepartureDateTo(departureDateTo);
+            filter.setArrivalDateFrom(arrivalDateFrom);
+            filter.setArrivalDateTo(arrivalDateTo);
 
-        String departureAirport = req.getParameter(DEPARTURE_AIRPORT);
-        String arrivalAirport = req.getParameter(ARRIVAL_AIRPORT);
-        String status = req.getParameter(STATUS);
-        LocalDateTime departureDateFrom = LocalDateTime.parse(req.getParameter(DEPARTURE_DATE_FROM));
-        LocalDateTime departureDateTo = LocalDateTime.parse(req.getParameter(DEPARTURE_DATE_TO));
-        LocalDateTime arrivalDateFrom = LocalDateTime.parse(req.getParameter(ARRIVAL_DATE_FROM));
-        LocalDateTime arrivalDateTo = LocalDateTime.parse(req.getParameter(ARRIVAL_DATE_TO));
+            List<FlightDTO> flights = flightService.getFlight(filter);
 
-        FlightFilterDTO filter = new FlightFilterDTO();
-        filter.setDepartureAirport(departureAirport);
-        filter.setArrivalAirport(arrivalAirport);
-        filter.setStatus(status);
-        filter.setDepartureDateFrom(departureDateFrom);
-        filter.setDepartureDateTo(departureDateTo);
-        filter.setArrivalDateFrom(arrivalDateFrom);
-        filter.setArrivalDateTo(arrivalDateTo);
+            writer.write(mapper.writeValueAsString(flights));
+        } catch (Exception e) {
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            e.printStackTrace();
+        }
+    }
 
-        List<FlightDTO> flights = flightService.getFlight(filter);
-
-        writer.write(mapper.writeValueAsString(flights));
+    private LocalDateTime parseLocalDateTime(String dateTimeString) {
+        if (dateTimeString != null && !dateTimeString.isEmpty()) {
+            return LocalDateTime.parse(dateTimeString);
+        }
+        return null;
     }
 }
-

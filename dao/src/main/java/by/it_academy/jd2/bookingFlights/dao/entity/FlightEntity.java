@@ -173,6 +173,30 @@ public class FlightEntity {
     public void setActualArrivalLocal(LocalDateTime actualArrivalLocal) {
         this.actualArrivalLocal = actualArrivalLocal;
     }
+
+    @Override
+    public String toString() {
+        return "FlightEntity{" +
+                "flightId=" + flightId +
+                ", flightNo='" + flightNo + '\'' +
+                ", scheduledDeparture=" + scheduledDeparture +
+                ", scheduledDepartureLocal=" + scheduledDepartureLocal +
+                ", scheduledArrival=" + scheduledArrival +
+                ", scheduledArrivalLocal=" + scheduledArrivalLocal +
+                ", departureAirport='" + departureAirport + '\'' +
+                ", departureAirportName='" + departureAirportName + '\'' +
+                ", departureCity='" + departureCity + '\'' +
+                ", arrivalAirport='" + arrivalAirport + '\'' +
+                ", arrivalAirportName='" + arrivalAirportName + '\'' +
+                ", arrivalCity='" + arrivalCity + '\'' +
+                ", status='" + status + '\'' +
+                ", aircraftCode='" + aircraftCode + '\'' +
+                ", actualDeparture=" + actualDeparture +
+                ", actualDepartureLocal=" + actualDepartureLocal +
+                ", actualArrival=" + actualArrival +
+                ", actualArrivalLocal=" + actualArrivalLocal +
+                '}';
+    }
 }
 
 
