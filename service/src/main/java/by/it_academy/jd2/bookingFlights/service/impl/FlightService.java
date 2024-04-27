@@ -3,7 +3,7 @@ package by.it_academy.jd2.bookingFlights.service.impl;
 
 import by.it_academy.jd2.bookingFlights.core.dto.FlightFilterDTO;
 import by.it_academy.jd2.bookingFlights.dao.api.IFlightDao;
-import by.it_academy.jd2.bookingFlights.dao.entity.FlightEntity;
+import by.it_academy.jd2.bookingFlights.dao.entity.ViewFlightEntity;
 import by.it_academy.jd2.bookingFlights.service.api.IFlightService;
 import by.it_academy.jd2.bookingFlights.service.api.dto.FlightDTO;
 
@@ -43,7 +43,7 @@ public class FlightService implements IFlightService {
                 .collect(Collectors.toList());
     }
 
-    private FlightDTO convert(FlightEntity entity){
+    private FlightDTO convert(ViewFlightEntity entity){
         return FlightDTO.builder()
                 .flightId(entity.getFlightId())
                 .flightNo(entity.getFlightNo())

@@ -1,9 +1,9 @@
 package by.it_academy.jd2.bookingFlights.dao.impl;
 
 import by.it_academy.jd2.bookingFlights.core.dto.FlightFilterDTO;
-import by.it_academy.jd2.bookingFlights.dao.Factory.DaoFactory;
+import by.it_academy.jd2.bookingFlights.dao.factory.DaoFactory;
 import by.it_academy.jd2.bookingFlights.dao.api.IFlightDao;
-import by.it_academy.jd2.bookingFlights.dao.entity.FlightEntity;
+import by.it_academy.jd2.bookingFlights.dao.entity.ViewFlightEntity;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -105,7 +105,7 @@ public class FlightDao implements IFlightDao {
             "    (scheduled_arrival <= COALESCE(?, null));";
 
     @Override
-    public Optional<FlightEntity> getFlight(int id) {
+    public Optional<ViewFlightEntity> getFlight(int id) {
         try (Connection conn = DaoFactory.getConnection();
              PreparedStatement st = conn.prepareStatement(GET_BY_ID)) {
             st.setInt(1, id);
@@ -121,11 +121,11 @@ public class FlightDao implements IFlightDao {
     }
 
     @Override
-    public List<FlightEntity> getFlight() {
+    public List<ViewFlightEntity> getFlight() {
         try (Connection conn = DaoFactory.getConnection();
              PreparedStatement st = conn.prepareStatement(GET_ALL);
              ResultSet rs = st.executeQuery()) {
-            List<FlightEntity> data = new ArrayList<>();
+            List<ViewFlightEntity> data = new ArrayList<>();
             while (rs.next()) {
                 data.add(read(rs));
             }
@@ -136,7 +136,7 @@ public class FlightDao implements IFlightDao {
     }
 
     @Override
-    public List<FlightEntity> getFlight(Integer page, Integer size) {
+    public List<ViewFlightEntity> getFlight(Integer page, Integer size) {
         try (Connection conn = DaoFactory.getConnection();
              PreparedStatement st = conn.prepareStatement(GET_PAGE)) {
 
@@ -144,7 +144,7 @@ public class FlightDao implements IFlightDao {
             st.setLong(2, (page - 1L) * size);
 
             try (ResultSet rs = st.executeQuery()) {
-                List<FlightEntity> data = new ArrayList<>();
+                List<ViewFlightEntity> data = new ArrayList<>();
                 while (rs.next()) {
                     data.add(read(rs));
                 }
@@ -156,7 +156,7 @@ public class FlightDao implements IFlightDao {
     }
 
     @Override
-    public List<FlightEntity> getFlight(FlightFilterDTO filter) {
+    public List<ViewFlightEntity> getFlight(FlightFilterDTO filter) {
         try (Connection conn = DaoFactory.getConnection();
              PreparedStatement st = conn.prepareStatement(GET_FILTER_PAGE)) {
 
@@ -176,7 +176,7 @@ public class FlightDao implements IFlightDao {
 
 
             try (ResultSet rs = st.executeQuery()) {
-                List<FlightEntity> data = new ArrayList<>();
+                List<ViewFlightEntity> data = new ArrayList<>();
                 while (rs.next()) {
                     data.add(read(rs));
                 }
@@ -188,8 +188,8 @@ public class FlightDao implements IFlightDao {
     }
 
 
-    private FlightEntity read(ResultSet rs) throws SQLException {
-        FlightEntity entity = new FlightEntity();
+    private ViewFlightEntity read(ResultSet rs) throws SQLException {
+        ViewFlightEntity entity = new ViewFlightEntity();
         entity.setFlightId(rs.getInt("flight_id"));
         entity.setFlightNo(rs.getString("flight_no"));
         entity.setScheduledDeparture(rs.getObject("scheduled_departure", OffsetDateTime.class));

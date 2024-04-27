@@ -1,33 +1,57 @@
 package by.it_academy.jd2.bookingFlights.dao.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.time.*;
-
-public class FlightEntity {
+@Table(name = "flights_v", schema = "bookings")
+@Entity
+public class ViewFlightEntity {
+    @Id
+    @Column(name = "flight_id")
     private Integer flightId;
+    @Column(name = "flight_no")
     private String flightNo;
+    @Column(name = "scheduled_departure")
     private OffsetDateTime scheduledDeparture;
+    @Column(name = "scheduled_departure_local")
     private LocalDateTime scheduledDepartureLocal;
+    @Column(name = "scheduled_arrival")
     private OffsetDateTime scheduledArrival;
+    @Column(name = "scheduled_arrival_local")
     private LocalDateTime scheduledArrivalLocal;
-
-    //    private  scheduledDuration;
+    //    @Column(name = "scheduled_duration
+//    private  scheduledDuration;
+    @Column(name = "departure_airport")
     private String departureAirport;
+    @Column(name = "departure_airport_name")
     private String departureAirportName;
+    @Column(name = "departure_city")
     private String departureCity;
+    @Column(name = "arrival_airport")
     private String arrivalAirport;
+    @Column(name = "arrival_airport_name")
     private String arrivalAirportName;
+    @Column(name = "arrival_city")
     private String arrivalCity;
+    @Column
     private String status;
+    @Column(name = "aircraft_code")
     private String aircraftCode;
+    @Column(name = "actual_departure")
     private OffsetDateTime actualDeparture;
+    @Column(name = "actual_departure_local")
     private LocalDateTime actualDepartureLocal;
+    @Column(name = "actual_arrival")
     private OffsetDateTime actualArrival;
+    @Column(name = "actual_arrival_local")
     private LocalDateTime actualArrivalLocal;
-
+//    @Column(name = "actual_duration
 //    private actual_duration;
 
-
-    public FlightEntity() {
+    public ViewFlightEntity() {
     }
 
     public Integer getFlightId() {

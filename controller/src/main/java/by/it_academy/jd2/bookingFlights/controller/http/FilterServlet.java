@@ -4,7 +4,7 @@ import by.it_academy.jd2.bookingFlights.controller.factory.ControllerFactory;
 import by.it_academy.jd2.bookingFlights.core.dto.FlightFilterDTO;
 import by.it_academy.jd2.bookingFlights.service.api.IFlightService;
 import by.it_academy.jd2.bookingFlights.service.api.dto.FlightDTO;
-import by.it_academy.jd2.bookingFlights.service.serviceFactory.ServiceFactorySingleton;
+import by.it_academy.jd2.bookingFlights.service.factory.ServiceFactorySingleton;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

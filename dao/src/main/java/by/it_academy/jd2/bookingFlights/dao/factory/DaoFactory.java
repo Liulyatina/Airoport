@@ -1,4 +1,4 @@
-package by.it_academy.jd2.bookingFlights.dao.Factory;
+package by.it_academy.jd2.bookingFlights.dao.factory;
 
 import by.it_academy.jd2.bookingFlights.dao.impl.FlightDao;
 import by.it_academy.jd2.bookingFlights.dao.api.IFlightDao;
@@ -7,9 +7,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class DaoFactory {
 

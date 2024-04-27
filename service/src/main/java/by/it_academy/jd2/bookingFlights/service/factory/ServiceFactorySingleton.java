@@ -1,6 +1,6 @@
-package by.it_academy.jd2.bookingFlights.service.serviceFactory;
+package by.it_academy.jd2.bookingFlights.service.factory;
 
-import by.it_academy.jd2.bookingFlights.dao.Factory.DaoFactory;
+import by.it_academy.jd2.bookingFlights.dao.factory.DaoFactory;
 import by.it_academy.jd2.bookingFlights.service.impl.FlightService;
 import by.it_academy.jd2.bookingFlights.service.api.IFlightService;
 
