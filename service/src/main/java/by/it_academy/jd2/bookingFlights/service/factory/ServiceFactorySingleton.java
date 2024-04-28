@@ -1,6 +1,6 @@
 package by.it_academy.jd2.bookingFlights.service.factory;
 
-import by.it_academy.jd2.bookingFlights.dao.factory.DaoFactory;
+import by.it_academy.jd2.bookingFlights.dao.factory.DaoFactoryHibernate;
 import by.it_academy.jd2.bookingFlights.service.impl.FlightService;
 import by.it_academy.jd2.bookingFlights.service.api.IFlightService;
 
@@ -12,7 +12,7 @@ public class ServiceFactorySingleton {
         if(flightService == null){
             synchronized (ServiceFactorySingleton.class){
                 if(flightService == null){
-                    flightService = new FlightService(DaoFactory.getFlightDao());
+                    flightService = new FlightService(DaoFactoryHibernate.getFlightDao());
                 }
             }
         }

@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.math.BigDecimal;
+
 @Table(name = "ticket_flights", schema = "bookings")
 @Entity
 public class TicketFlightsEntity {
@@ -18,16 +20,16 @@ public class TicketFlightsEntity {
     @Column(name = "fare_conditions")
     private String fareConditions;
     @Column(precision = 10, scale = 2)
-    private Double anount;
+    private BigDecimal amount;
 
     public TicketFlightsEntity() {
     }
 
-    public TicketFlightsEntity(Integer ticketNo, Integer flightId, String fareConditions, Double anount) {
+    public TicketFlightsEntity(Integer ticketNo, Integer flightId, String fareConditions, BigDecimal amount) {
         this.ticketNo = ticketNo;
         this.flightId = flightId;
         this.fareConditions = fareConditions;
-        this.anount = anount;
+        this.amount = amount;
     }
 
     public Integer getTicketNo() {
@@ -54,11 +56,11 @@ public class TicketFlightsEntity {
         this.fareConditions = fareConditions;
     }
 
-    public Double getAnount() {
-        return anount;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public void setAnount(Double anount) {
-        this.anount = anount;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 }

@@ -1,7 +1,9 @@
 package by.it_academy.jd2.bookingFlights.dao.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
 
+import java.awt.*;
 import java.util.List;
 
 @Table(name = "airports_data", schema = "bookings")
@@ -15,19 +17,17 @@ public class AirportDataEntity {
     private String airportName;
     @Column(columnDefinition = "jsonb")
     private String city;
-    private Double latitude;
-    private Double longitude;
+    private Point coordinates;
     private String timezone;
 
     public AirportDataEntity() {
     }
 
-    public AirportDataEntity(Integer airportCode, String airportName, String city, Double latitude, Double longitude, String timezone) {
+    public AirportDataEntity(Integer airportCode, String airportName, String city, Point coordinates, String timezone) {
         this.airportCode = airportCode;
         this.airportName = airportName;
         this.city = city;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.coordinates = coordinates;
         this.timezone = timezone;
     }
 
@@ -55,20 +55,12 @@ public class AirportDataEntity {
         this.city = city;
     }
 
-    public Double getLatitude() {
-        return latitude;
+    public Point getCoordinates() {
+        return coordinates;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    public void setCoordinates(Point coordinates) {
+        this.coordinates = coordinates;
     }
 
     public String getTimezone() {
