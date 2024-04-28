@@ -1,7 +1,7 @@
 package by.it_academy.jd2.bookingFlights.dao.factory;
 
 import by.it_academy.jd2.bookingFlights.dao.api.IFlightDao;
-import by.it_academy.jd2.bookingFlights.dao.impl.FlightDao;
+import by.it_academy.jd2.bookingFlights.dao.impl.FlightDaoHibernateImpl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -18,7 +18,7 @@ public class DaoFactoryHibernate {
         if (flightDao == null) {
             synchronized (DaoFactory.class) {
                 if (flightDao == null) {
-                    flightDao = new FlightDao();
+                    flightDao = new FlightDaoHibernateImpl();
                 }
             }
         }

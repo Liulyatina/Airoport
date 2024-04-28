@@ -1,8 +1,12 @@
 package by.it_academy.jd2.bookingFlights.dao.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Table(name = "ticket_flights", schema = "bookings")
+@Entity
 public class TicketFlightsEntity {
 
     @Id

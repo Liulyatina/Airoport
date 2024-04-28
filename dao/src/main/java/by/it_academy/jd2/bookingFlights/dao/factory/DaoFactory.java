@@ -1,7 +1,7 @@
 package by.it_academy.jd2.bookingFlights.dao.factory;
 
-import by.it_academy.jd2.bookingFlights.dao.impl.FlightDao;
 import by.it_academy.jd2.bookingFlights.dao.api.IFlightDao;
+import by.it_academy.jd2.bookingFlights.dao.impl.FlightDaoHibernateImpl;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import javax.sql.DataSource;
@@ -42,7 +42,7 @@ public class DaoFactory {
         if (flightDao == null) {
             synchronized (DaoFactory.class) {
                 if (flightDao == null) {
-                    flightDao = new FlightDao();
+                    flightDao = new FlightDaoHibernateImpl();
                 }
             }
         }

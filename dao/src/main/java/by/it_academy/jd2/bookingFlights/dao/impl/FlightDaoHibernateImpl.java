@@ -44,10 +44,9 @@ public class FlightDaoHibernateImpl implements IFlightDao {
         CriteriaQuery<ViewFlightEntity> query = cb.createQuery(ViewFlightEntity.class);
         query.from(ViewFlightEntity.class);
         List<ViewFlightEntity> resultList = em.createQuery(query)
-                .setFirstResult((page-1)*size)
+                .setFirstResult((page - 1) * size)
                 .setMaxResults(size)
                 .getResultList();
-
         em.getTransaction().commit();
         return resultList;
     }
@@ -64,17 +63,18 @@ public class FlightDaoHibernateImpl implements IFlightDao {
         List<Predicate> predicates = new ArrayList<>();
 
         if (filter.getDepartureAirport() != null) {
-            predicates.add(cb.equal(flight.get("departure_airport"), filter.getDepartureAirport()));
+            predicates.add(cb.equal(flight.get("departureAirport"), filter.getDepartureAirport()));
         }
         if (filter.getArrivalAirport() != null) {
-            predicates.add(cb.equal(flight.get("arrival_airport"), filter.getArrivalAirport()));
+            predicates.add(cb.equal(flight.get("arrivalAirport"), filter.getArrivalAirport()));
         }
-        if (filter.getDepartureDate() != null) {
-            predicates.add(cb.greaterThanOrEqualTo(flight.get("departureDate"), filter.getDepartureDate()));
+        if (filter.getDepartureDateTo() != null) {
+            predicates.add(cb.lessThanOrEqualTo(flight.get("departureDate"), filter.getDepartureDateTo()));
         }
-        if (filter.getArrivalDate() != null) {
-            predicates.add(cb.lessThanOrEqualTo(flight.get("arrivalDate"), filter.getArrivalDate()));
+        if (filter.getArrivalDateFrom() != null) {
+            predicates.add(cb.greaterThanOrEqualTo(flight.get("arrivalDate"), filter.getArrivalDateFrom()));
         }
+
 
         query.where(predicates.toArray(new Predicate[0]));
 
@@ -83,5 +83,4 @@ public class FlightDaoHibernateImpl implements IFlightDao {
         em.getTransaction().commit();
         return resultList;
     }
-
 }

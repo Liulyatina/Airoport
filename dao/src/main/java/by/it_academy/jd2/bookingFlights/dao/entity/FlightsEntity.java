@@ -1,41 +1,49 @@
 package by.it_academy.jd2.bookingFlights.dao.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 @Table(name = "flights", schema = "bookings")
 @Entity
 public class FlightsEntity {
     @Id
-    @Column(name = "flight_id")
-    private Integer flightId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long flightId;
     @Column(name = "flight_no")
     private String flightNo;
     @Column(name = "scheduled_departure")
     private OffsetDateTime scheduledDeparture;
     @Column(name = "scheduled_arrival")
     private OffsetDateTime scheduledArrival;
-    @Column(name = "departure_airport")
-    private String departureAirport;
-    @Column(name = "arrival_airport")
-    private String arrivalAirport;
+    @ManyToOne
+    @JoinColumn(name = "departure_airport", referencedColumnName = "airport_code")
+    private AirportDataEntity departureAirport;
+
+    @ManyToOne
+    @JoinColumn(name = "arrival_airport", referencedColumnName = "airport_code")
+    private AirportDataEntity arrivalAirport;
     @Column
     private String status;
-    @Column(name = "aircraft_code")
-    private String aircraftCode;
+    @ManyToOne
+    @JoinColumn(name = "aircraft_code", referencedColumnName = "aircraft_code")
+    private AircraftsDataEntity aircraftCode;
     @Column(name = "actual_departure")
     private OffsetDateTime actualDeparture;
     @Column(name = "actual_arrival")
     private OffsetDateTime actualArrival;
 
+    @OneToMany(mappedBy = "flightId")
+    private List<TicketFlightsEntity> ticketFlights;
+
+
     public FlightsEntity() {
     }
 
-    public FlightsEntity(Integer flightId, String flightNo, OffsetDateTime scheduledDeparture, OffsetDateTime scheduledArrival, String departureAirport, String arrivalAirport, String status, String aircraftCode, OffsetDateTime actualDeparture, OffsetDateTime actualArrival) {
+    public FlightsEntity(Long flightId, String flightNo, OffsetDateTime scheduledDeparture, OffsetDateTime scheduledArrival,
+                         AirportDataEntity departureAirport, AirportDataEntity arrivalAirport, String status, AircraftsDataEntity aircraftCode,
+                         OffsetDateTime actualDeparture, OffsetDateTime actualArrival) {
         this.flightId = flightId;
         this.flightNo = flightNo;
         this.scheduledDeparture = scheduledDeparture;
@@ -48,11 +56,11 @@ public class FlightsEntity {
         this.actualArrival = actualArrival;
     }
 
-    public Integer getFlightId() {
+    public Long getFlightId() {
         return flightId;
     }
 
-    public void setFlightId(Integer flightId) {
+    public void setFlightId(Long flightId) {
         this.flightId = flightId;
     }
 
@@ -80,19 +88,19 @@ public class FlightsEntity {
         this.scheduledArrival = scheduledArrival;
     }
 
-    public String getDepartureAirport() {
+    public AirportDataEntity getDepartureAirport() {
         return departureAirport;
     }
 
-    public void setDepartureAirport(String departureAirport) {
+    public void setDepartureAirport(AirportDataEntity departureAirport) {
         this.departureAirport = departureAirport;
     }
 
-    public String getArrivalAirport() {
+    public AirportDataEntity getArrivalAirport() {
         return arrivalAirport;
     }
 
-    public void setArrivalAirport(String arrivalAirport) {
+    public void setArrivalAirport(AirportDataEntity arrivalAirport) {
         this.arrivalAirport = arrivalAirport;
     }
 
@@ -104,11 +112,11 @@ public class FlightsEntity {
         this.status = status;
     }
 
-    public String getAircraftCode() {
+    public AircraftsDataEntity getAircraftCode() {
         return aircraftCode;
     }
 
-    public void setAircraftCode(String aircraftCode) {
+    public void setAircraftCode(AircraftsDataEntity aircraftCode) {
         this.aircraftCode = aircraftCode;
     }
 

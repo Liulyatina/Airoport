@@ -1,9 +1,8 @@
 package by.it_academy.jd2.bookingFlights.dao.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Table(name = "aircrafts_data", schema = "bookings")
 @Entity
