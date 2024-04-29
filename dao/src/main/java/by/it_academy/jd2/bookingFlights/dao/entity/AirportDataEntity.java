@@ -1,10 +1,8 @@
 package by.it_academy.jd2.bookingFlights.dao.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
 
 import java.awt.*;
-import java.util.List;
 
 @Table(name = "airports_data", schema = "bookings")
 @Entity
