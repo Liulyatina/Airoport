@@ -1,7 +1,6 @@
 package by.it_academy.jd2.bookingFlights.dao.factory;
 
 import by.it_academy.jd2.bookingFlights.dao.api.IFlightDao;
-import by.it_academy.jd2.bookingFlights.dao.impl.FlightDaoHibernateImpl;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -43,17 +42,6 @@ public class DaoFactoryHibernate {
 
     static {
         entityManagerFactory = Persistence.createEntityManagerFactory("jpa-entity-definition");
-    }
-
-    public static IFlightDao getFlightDao() {
-        if (flightDao == null) {
-            synchronized (DaoFactoryHibernate.class) {
-                if (flightDao == null) {
-                    flightDao = new FlightDaoHibernateImpl();
-                }
-            }
-        }
-        return flightDao;
     }
 
     public static EntityManager getEntityManager() {

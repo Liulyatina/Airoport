@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class FlightDaoHibernateImpl implements IFlightDao {
+public class FlightDao implements IFlightDao {
     @Override
     public Optional<ViewFlightEntity> getFlight(int id) {
         EntityManager em = DaoFactoryHibernate.getEntityManager();

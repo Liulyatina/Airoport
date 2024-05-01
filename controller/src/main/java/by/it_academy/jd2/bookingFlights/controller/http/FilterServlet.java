@@ -1,10 +1,9 @@
 package by.it_academy.jd2.bookingFlights.controller.http;
 
-import by.it_academy.jd2.bookingFlights.controller.factory.ControllerFactory;
+import by.it_academy.jd2.bookingFlights.controller.factory.AppFactory;
 import by.it_academy.jd2.bookingFlights.core.dto.FlightFilterDTO;
 import by.it_academy.jd2.bookingFlights.service.api.IFlightService;
 import by.it_academy.jd2.bookingFlights.service.api.dto.FlightDTO;
-import by.it_academy.jd2.bookingFlights.service.factory.ServiceFactorySingleton;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,8 +26,8 @@ public class FilterServlet extends HttpServlet {
     private static final String ARRIVAL_DATE_FROM = "arrivalDateFrom";
     private static final String ARRIVAL_DATE_TO = "arrivalDateTo";
 
-    private final IFlightService flightService = ServiceFactorySingleton.getFlightService();
-    private final ObjectMapper mapper = ControllerFactory.getMapper();
+    private final IFlightService flightService = AppFactory.getFlightService();
+    private final ObjectMapper mapper = AppFactory.getMapper();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

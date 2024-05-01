@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Beans DAO -->
+    <bean id="flightDao" class="by.it_academy.jd2.bookingFlights.dao.impl.FlightDao"/>
+
+    <!-- Beans Service -->
+    <bean id="flightService" class="by.it_academy.jd2.bookingFlights.service.impl.FlightService">
+        <constructor-arg type="by.it_academy.jd2.bookingFlights.dao.api.IFlightDao" ref="flightDao"/>
+        <constructor-arg type="by.it_academy.jd2.bookingFlights.service.api.IConverter" ref="viewFlightConverter"/>
+    </bean>
+    <bean id="viewFlightConverter" class="by.it_academy.jd2.bookingFlights.service.converter.Converter"/>
+</beans>
